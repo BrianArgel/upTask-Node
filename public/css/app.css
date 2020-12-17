@@ -236,6 +236,7 @@ body.index {
     color: #00B762;
 }
 .alerta {
+    color: white;
     padding: .5rem;
     text-align: center;
     font-size: .9rem;
@@ -243,6 +244,8 @@ body.index {
     max-width: 300px;
     margin: 0 auto 1rem auto;
     text-transform: uppercase;
+    background-color: #be2510;
+    border: 3px solid rgb(219, 73, 73);
 }
 .error {
     color: red!important;
