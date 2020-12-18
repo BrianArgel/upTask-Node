@@ -15,7 +15,16 @@ module.exports = function() {
     router.post('/nuevo-proyecto', 
     body('nombre').not().isEmpty().trim().escape(),
     proyectosController.nuevoProyecto)
+    //Listar el proyecto
     router.get('/proyectos/:url', proyectosController.proyectoPorUrl)
+
+    //actualizar el proyecto
+    router.get('/proyectos/editar/:id', proyectosController.formularioEditar)
+
+    //Editar nombre proyecto
+    router.post('/nuevo-proyecto/:id', 
+    body('nombre').not().isEmpty().trim().escape(),
+    proyectosController.actualizarProyecto)
 
     return router;
 }
