@@ -20,17 +20,34 @@ if(btnEliminar) {
             if (result.isConfirmed) {
 
                 //enviar peticion a axios
+                const url = `${location.origin}/proyectos/${urlProyecto}`
+               
+
                 
-              Swal.fire(
-                'Proyecto eliminado!',
-                'Proyecto se ha eliminado.',
-                'success'
-              );
-    
-              //redireccionar al inicio
-              setTimeout(() => {
-                window.location.href="/"
-              }, 3000)
+                //enviar peticion eliminar
+                axios.delete(url, {params: {urlProyecto}})
+                    .then(function(respuesta) {
+                        Swal.fire(
+                            'Proyecto eliminado!',
+                            'Proyecto se ha eliminado.',
+                            'success'
+                          );
+                           
+                          //redireccionar al inicio
+                          setTimeout(() => {
+                            window.location.href= '/'
+                          }, 3000);
+                          console.log(respuesta)
+                    })
+                    
+                    .catch(() => {
+                        Swal.fire({
+                            type: 'Error',
+                            title: 'Hubo un error',
+                            text: "No se pudo eliminar el proyecto"
+                        })
+                    })
+             
             }
           })
     })
