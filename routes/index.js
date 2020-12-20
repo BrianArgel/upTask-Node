@@ -6,7 +6,7 @@ const { body } = require('express-validator/check')
 
 //importar el controllador
 const proyectosController = require('../controllers/proyectosController')
-
+const tareasController = require('../controllers/tareasController')
 
 module.exports = function() {
     //rutas para el home
@@ -28,5 +28,12 @@ module.exports = function() {
 
     //eliminar proyecto
     router.delete('/proyectos/:url', proyectosController.eliminarProyecto)
+
+    //router para las tareas
+    router.post('/proyectos/:url', tareasController.agregarTarea)
+
+    //cambiar el estado de las tareas
+    router.patch('/tareas/:id', tareasController.cambiarEstadoTarea)
+
     return router;
 }
