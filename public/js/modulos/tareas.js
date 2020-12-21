@@ -1,5 +1,6 @@
-const axios = require("axios");
-const Swal = require('sweetalert2');
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import {actualizarAvance} from '../funciones/avance';
 
 
 
@@ -17,13 +18,58 @@ if(tareas) {
             
             axios.patch(url, { idTarea })
                 .then(function(respuesta){
-                    console.log(respuesta)
+                    if(respuesta.status === 200){
+                        icono.classList.toggle('completo')
+                        actualizarAvance()
+                    }
                 })
         }
 
-        
+        if(e.target.classList.contains('fa-trash')){
+            // console.log("probando....")
+            const tareaHTML = e.target.parentElement.parentElement,
+                  idTarea= tareaHTML.dataset.tarea;
+            // console.log(tareaHTML, idTarea)
+            Swal.fire({
+                title: 'Deseas eliminar esta tarea?',
+                text: "una tarea eliminado no se puede recuperar!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Borrar',
+                cancelButtonText: "No, cancelar"
+              }).then((result) => {
+                if (result.value) {
+                    // console.log('eliminado...')
+                    const url = `${location.origin}/tareas/${idTarea}`;
+                    //enviar el delete por medio de exios
+
+                    axios.delete(url, {params: { idTarea}})
+                        .then(function (respuesta) {
+                            // console.log(respuesta)
+                            if(respuesta.status === 200) {
+                                //eliminar nodo
+                                tareaHTML.parentElement.removeChild(tareaHTML);
+
+                                //opcional alerta
+                                Swal.fire (
+                                    'Tarea Eliminada',
+                                    respuesta.data,
+                                    'success'
+                                )
+                                actualizarAvance()
+
+                                
+                            }
+                        })
+                    }
+                })
+    
+
+        }
     });
 
 }
 
-module.exports = tareas;
+export default tareas

@@ -25,7 +25,10 @@ block contenido
                                 i.fas.fa-trash
                 else
                     p No hay tareas
-
+        .avance
+            h2 avance del proyecto
+            #barra-avance.barra-avance
+                #porcentaje.porcentaje
         .contenedor-acciones
             a(href=`/proyectos/editar/${proyecto.id}` class="boton") Editar Proyecto
             button#eliminar-proyecto(data-proyecto-url=proyecto.url type="button" class="boton eliminar")  Eliminar 
