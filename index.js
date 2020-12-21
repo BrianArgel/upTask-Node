@@ -33,6 +33,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 //creando app en expreess 
 app.use('/', routes())
 
-app.listen(10000, () => {
+app.listen(60000, () => {
     console.log("funcionando express")
 })
