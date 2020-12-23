@@ -19,7 +19,7 @@ if(tareas) {
             axios.patch(url, { idTarea })
                 .then(function(respuesta){
                     if(respuesta.status === 200){
-                        icono.classList.toggle('completooo')
+                        icono.classList.toggle('completo')
                         actualizarAvance()
                     }
                 })
